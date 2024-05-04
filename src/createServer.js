@@ -7,7 +7,6 @@ const cors = require("cors");
 const routerUsers = require("./usersAPI/users-router");
 const routerExpenses = require("./expensesAPI/expenses-router");
 const routerCategories = require("./categotiesAPI/categories-router");
-const routerGifs = require("./gifsAPI/gifs-router");
 const cookieParser = require("cookie-parser");
 const { authMiddleware } = require("./middleware/authMiddleware");
 require("dotenv/config");
@@ -46,13 +45,11 @@ function createServer() {
   app.use("/users", routerUsers);
 
   // ======= CATEGORIES API:
-  app.use("/categories", routerCategories);
+  app.use("/categories", authMiddleware, routerCategories);
 
   // ======= EXPENSES API:
-  app.use("/expenses", routerExpenses);
+  app.use("/expenses",authMiddleware,  routerExpenses);
 
-  // ======= GIFs API:
-  app.use("/gifs", routerGifs);
   return app;
 }
 
