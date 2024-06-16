@@ -151,7 +151,7 @@ const deleteExpense = async(req, res) => {
     const deletedItem = {...expenseFromDB}
     await expenseFromDB.destroy();
 
-    res.statusCode = 204;
+    res.statusCode = 200;
     res.json(JSON.stringify(deletedItem.dataValues));
   } catch (e) {
     res.sendStatus(500);
